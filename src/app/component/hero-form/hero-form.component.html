@@ -1,0 +1,41 @@
+
+<form #heroForm="ngForm" novalidate>
+  <div class="m-3">
+    <label for="{{hero?.fullname}}" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="{{hero?.fullname}}"
+    name="fullname" #fullname="ngModel" [ngModel]="hero?.fullname"
+    required placeholder="nombre">
+    <small *ngIf="fullname.errors?.required && fullname.dirty">Nombre es requerido</small>
+  </div>
+  <div class="form-group m-3">
+    <div class="m-1 d-none">
+      <label for="{{hero?.id}}" class="form-label" >Id Heroe</label>
+      <input type="text" class="form-control" id="{{hero?.id}}"
+      name="id" [ngModel]="hero?.id" [readonly]="true" >
+    </div>
+    <div class="m-1">
+    <label for="power">Hero Power</label>
+    <select class="form-control" id="{{hero?.power}}"
+      name="power" #power="ngModel"
+      [ngModel]="hero?.power ? hero.power : null" required>
+      <option [disabled]="true">- Escoja una opción -</option>
+      <option *ngIf="hero?.power">{{hero.power}}</option>
+      <option *ngFor="let power of heroPowers"
+      [value]="power">{{power}}</option>
+    </select>
+    <small *ngIf="power.errors?.required && (power.dirty || power.touched)">Poder es requerido</small>
+    </div>
+  </div>
+  <div class="modal-body">
+    <label for="description" class="form-label">Description</label>
+    <textarea rows="5" cols="10" type="text" class="form-control" id="description"
+    name="description" #description="ngModel" [ngModel]="hero?.description" required></textarea>
+    <small *ngIf="description.errors?.required && description.dirty">Description es requerida</small>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!flag" type="button" class="btn btn-primary" [disabled]="heroForm.invalid"
+      (click)="sendHeroInfo(heroForm.value)">Save changes</button>
+    <button *ngIf="flag" type="button" class="btn btn-primary" [disabled]="heroForm.invalid"
+        (click)="sendHeroInfo(heroForm.value)">Add New Hero</button>
+  </div>
+</form>

@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text">Search</span>
+    <input type="search" class="form-control"
+      [(ngModel)]="query" placeholder="Consultar por Nombre o Id" (ngModelChange)="onModelChange($event)">
+  </div>
+</div>

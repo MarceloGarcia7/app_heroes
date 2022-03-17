@@ -1,0 +1,8 @@
+.show-modal{
+  display: block;
+}
+
+.selected {
+  background-color: black;
+  color: white;
+}

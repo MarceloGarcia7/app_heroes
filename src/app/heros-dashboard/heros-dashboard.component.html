@@ -1,0 +1,37 @@
+
+<div>
+    <app-search-hero (searchHero)="searchHeroEvent($event)"></app-search-hero>
+</div>
+<div class="container m-3">
+  <button
+    type="button"
+    (click)="addNewHero(true)"
+    class="btn btn-outline-info btn-sm">Nuevo Hero
+  </button>
+</div>
+<div class="container d-flex flex-wrap justify-content-around ">
+
+  <div class="card mb-2" style="width: 18rem;" *ngFor="let hero of heroesFromService | searchFilter: searchHeroValue">
+    <div class="card-body" [class.selected]="hero === selectedHero">
+      <h4 class="card-title">{{hero.fullname}}</h4>
+      <small class="card-subtitle mb-2 text-muted float-end">ID: {{hero.id}}</small>
+      <h5 class="card-subtitle mb-2 text-muted">Power: {{hero.power}}</h5>
+      <p class="card-text">{{hero.description}}</p>
+      <button
+        type="button"
+        (click)="onSelect(hero)"
+        class="btn btn-outline-info btn-sm">Editar
+      </button>
+      <button
+        type="button"
+        (click)="handleDelete(hero)"
+        class="btn btn-outline-danger btn-sm float-end">Borrar
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<app-hero-detail [hero]="selectedHero" [flag]="flag" [showModalEliminar]="showModalEliminar"
+  (updatedHero)="updateHeroEvent($event)" (addNewHero)="addNewHeroEvent($event)"(closeModalEvent)="closeModalEvent($event)">
+</app-hero-detail>
